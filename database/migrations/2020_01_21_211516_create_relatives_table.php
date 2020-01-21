@@ -22,13 +22,12 @@ class CreateRelativesTable extends Migration
             $table->integer('telephone');
             $table->string('email');
             $table->string('ocupation');
-            $table->enum('kinship_degree',[
-                'Grandparents', 'Mother', 'Father','Grandchild', 'Son','Sister','Broher', 'Wife','Husband','Girlfriend','Boyfriend','Other']);
             $table->string('address');
             $table->string('city');
             $table->string('contry');
             $table->string('state_province');
             $table->rememberToken();
+
             $table->timestamps();
         });
     }
