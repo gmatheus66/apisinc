@@ -24,6 +24,10 @@ class CreatePatientsTable extends Migration
             $table->string('ocupation');
             $table->string('token_watchband');
             $table->string('token_login');
+            $table->string('address');
+            $table->string('city');
+            $table->string('contry');
+            $table->string('state_province');
             $table->rememberToken();
             $table->timestamps();
         });
