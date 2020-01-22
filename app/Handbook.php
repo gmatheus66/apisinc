@@ -15,10 +15,10 @@ class Handbooks extends Model
 		report'
 	];
 	protected $guarded = [
-		'id';
+		'id',
 		'created_at',
-		'update_at';
-		'token_band';
-		'token_login';
+		'update_at',
+		'token_band',
+		'token_login',
 	]
     }
