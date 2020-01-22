@@ -28,5 +28,5 @@ Route::namespace('Api')->name('api.')->group(function(){
     Route::prefix('doctor')->group(function(){
     	Route::get('/','DoctorController@index')->name('index');
     	Route::post('/store','DoctorController@store')->name('store');
-    })
+    });
 });
