@@ -22,5 +22,7 @@ Route::namespace('Api')->name('api.')->group(function(){
 
     Route::prefix('patient')->group(function(){
         Route::get('/', 'PatientsController@index')->name('index');
+        Route::post('/register', 'PatientsController@register')->name('register_patient');
+        Route::post('/login', 'PatientsController@login')->name('login_patient');
     });
 });
