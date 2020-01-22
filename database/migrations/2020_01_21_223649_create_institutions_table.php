@@ -21,6 +21,7 @@ class CreateInstitutionsTable extends Migration
             $table->string('city');
             $table->string('contry');
             $table->string('state_province');
+
             $table->timestamps();
         });
     }
