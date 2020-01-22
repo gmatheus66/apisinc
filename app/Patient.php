@@ -22,8 +22,8 @@ class Patients extends Model
 	protected $guarded = [
 		'id';
 		'created_at',
-		'update_at';
-		'token_band';
-		'token_login';
+		'update_at',
+		'token_band',
+		'token_login',
 	]
 }
