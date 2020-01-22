@@ -15,6 +15,6 @@ class institution extends Model
    	'state_province'
    ]
    protected $guarded [
-   'eni'
+  
    ]
 }
