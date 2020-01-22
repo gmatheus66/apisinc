@@ -20,8 +20,6 @@ class CreateDoctorsTable extends Migration
             $table->string('specialization');
             $table->string('token_login');
             $table->string('password');
-            $table->unsignedBigInteger('institution_id');
-            $table->foreign('institution_id')->references('id')->on('institutions');
             $table->rememberToken();
             $table->timestamps();
         });
