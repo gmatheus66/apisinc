@@ -27,7 +27,7 @@ class CreateRelativesTable extends Migration
             $table->string('contry');
             $table->string('state_province');
             $table->rememberToken();
-
+            $table->string('zip');
             $table->timestamps();
         });
     }
