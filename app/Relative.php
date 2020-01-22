@@ -17,11 +17,11 @@ class relatives extends Model
    	'address',
    	'city',
    	'coutry',
-   	'state_province'
+   	'state_province',
 
    ]
 
    protected $guarded = [
-   	'password'
+   	'password',
    ]
 }
