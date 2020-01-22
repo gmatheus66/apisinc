@@ -8,15 +8,18 @@ class Patient extends Model
 {
 	protected $fillable = [
 		'name',
-		'age',
+		'birthday',
 		'sex',
 		'phone',
-		'Email',
+		'email',
 		'occupation',
 		'address',
 		'city',
 		'country',
 		'state_province',
+		'password',
+		'telephone',
+		'zip'
 
 	];
 	protected $guarded = [
