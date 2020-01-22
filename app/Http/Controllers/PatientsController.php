@@ -23,3 +23,4 @@ class PatientsController extends Controller
     	return response()->json($this->patient->all(),200);
     }
 }
+}
