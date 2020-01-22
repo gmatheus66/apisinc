@@ -25,4 +25,8 @@ Route::namespace('Api')->name('api.')->group(function(){
         Route::post('/register', 'PatientsController@register')->name('register_patient');
         Route::post('/login', 'PatientsController@login')->name('login_patient');
     });
+    Route::prefix('doctor')->group(function(){
+    	Route::get('/','DoctorController@index')->name('index');
+    	Route::post('/store','DoctorController@store')->name('store');
+    })
 });
