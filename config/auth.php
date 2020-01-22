@@ -42,8 +42,23 @@ return [
         ],
 
         'api' => [
-            'driver' => 'token',
+            'driver' => 'passport',
             'provider' => 'users',
+            'hash' => false,
+        ],
+        'patients' => [
+            'driver' => 'passport',
+            'provider' => 'patient',
+            'hash' => false,
+        ],
+        'doctors' => [
+            'driver' => 'passport',
+            'provider' => 'doctor',
+            'hash' => false,
+        ],
+        'relatives' => [
+            'driver' => 'passport',
+            'provider' => 'relative',
             'hash' => false,
         ],
     ],
@@ -70,6 +85,18 @@ return [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
+        'patient' => [
+            'driver' => 'eloquent',
+            'model' => App\Patient::class,
+        ],
+        'doctor' => [
+            'driver' => 'eloquent',
+            'model' => App\Doctor::class,
+        ],
+        'relative' => [
+            'driver' => 'eloquent',
+            'model' => App\Relative::class,
+        ]
 
         // 'users' => [
         //     'driver' => 'database',
@@ -95,6 +122,12 @@ return [
     'passwords' => [
         'users' => [
             'provider' => 'users',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'patient' => [
+            'provider' => 'patient',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,
