@@ -12,9 +12,9 @@ class institution extends Model
    	'address',
    	'city',	
    	'contry',
-   	'state_province'
+   	'state_province',
    ]
    protected $guarded [
-   	'eni'
+   	'eni',
    ]
 }
