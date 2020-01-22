@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Patients extends Model
+class Patient extends Model
 {
 	protected $fillable = [
 		'name',
@@ -20,7 +20,7 @@ class Patients extends Model
 
 ];
 	protected $guarded = [
-		'id';
+		'id',
 		'created_at',
 		'update_at',
 		'token_band',
