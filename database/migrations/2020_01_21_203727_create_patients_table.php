@@ -28,6 +28,7 @@ class CreatePatientsTable extends Migration
             $table->string('city');
             $table->string('contry');
             $table->string('state_province');
+            $table->string('zip');
             $table->rememberToken();
             $table->timestamps();
         });
