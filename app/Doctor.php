@@ -10,13 +10,14 @@ class Doctor extends Model
 		'name',
 		'crm',
 		'specialization',
+		'institution_id'
 
 ];
 	protected $guarded = [
-		'id';
+		'id',
 		'created_at',
 		'update_at',
 		'token_band',
 		'token_login',
-	]
+	];
 }

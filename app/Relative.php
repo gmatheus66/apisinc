@@ -19,9 +19,9 @@ class relative extends Model
    	'coutry',
    	'state_province',
 
-   ]
+   ];
 
    protected $guarded = [
    	'password',
-   ]
+   ];
 }

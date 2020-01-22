@@ -18,12 +18,12 @@ class Patient extends Model
 		'country',
 		'state_province',
 
-];
+	];
 	protected $guarded = [
 		'id',
 		'created_at',
 		'update_at',
 		'token_band',
 		'token_login',
-	]
+	];
 }
