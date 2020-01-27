@@ -40,13 +40,12 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
-
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
             'hash' => false,
         ],
-        'patients' => [
+        'patient' => [
             'driver' => 'passport',
             'provider' => 'patient',
             'hash' => false,

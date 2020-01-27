@@ -7,10 +7,12 @@ use App\Patient;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 
 class PatientsController extends Controller
 {
 	private $patient;
+
 
 	public function __construct(Patient $p){
 		$this->patient = $p;
@@ -49,7 +51,7 @@ class PatientsController extends Controller
 		}
 
 		try{
-			$this->patient->create([
+			$pat = Patient::create([
 				'name' => $request->get('name'),
 				'birthday' => $request->get('birthday'),
 				'sex' => $request->get('sex'),
@@ -63,7 +65,9 @@ class PatientsController extends Controller
 				'zip' => $request->get('zip'),
 				'password' => Hash::make($request->get('password'))
 			]);
-			return response()->json(['data' => ['msg' => 'Patient successfully registered'] ],200);
+			$accessToken = $pat->createToken('authToken')->accessToken;
+
+			return response()->json(['data' => ['msg' => 'Patient successfully registered', 'access_token'=> $accessToken] ],200);
 		}
 		catch(Exception $e){
 			return response()->json($e);
@@ -72,45 +76,26 @@ class PatientsController extends Controller
 
 	public function login(Request $request){
 
-		$validator = Validator::make($request->all(),[
-				'email' => 'required|string|email',
-				'password' => 'required|string',
-				'remember_me' => 'boolean'
-		]);
-		
-		if(sizeof($validator->errors()) > 0 ){
-			return response()->json($validator->errors());
-		}
+		$loginData = $request->validate([
+            'email' => 'email|required',
+            'password' => 'required'
+        ]);
+ 
+        if(!Auth::attempt($loginData)) {
+            return response(['message'=>'Invalid credentials']);
+        }
 
-		try{
+        $accessToken = auth()->guard('patient')->user()->createToken('authToken')->accessToken;
 
-			$credentials = request(['email', 'password']);
-
-			if(!Auth::attempt($credentials)){
-           	 return response()->json(['message' => 'Unauthorized' ]);
-			}
-			$user = $request->user();
-			$tokenResult = $user->createToken('Personal Access Token');
-			$token = $tokenResult->token;
-			
-			if ($request->remember_me){
-
-				$token->expires_at = Carbon::now()->addWeeks(1);
-			}
-
-			$token->save();
-			return response()->json([
-				'access_token' => $tokenResult->accessToken,
-				'token_type' => 'Bearer',
-				'expires_at' => Carbon::parse(
-					$tokenResult->token->expires_at
-				)->toDateTimeString()
-			]);
-
-		}
-		catch(Exception $e){
-			return response()->json($e);
-		}
+        return response(['user' => auth()->guard('patient')->user(), 'access_token' => $accessToken]);
 
 	}
+
+	protected function guard()
+	{
+		return Auth::guard('patient');
+	}
+
+
 }
+	
