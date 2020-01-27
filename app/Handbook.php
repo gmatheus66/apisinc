@@ -20,5 +20,6 @@ class Handbook extends Model
 		'update_at',
 		'token_band',
 		'token_login',
-	]
-    }
+	];
+
+}
