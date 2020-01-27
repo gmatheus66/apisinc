@@ -23,7 +23,6 @@ class CreatePatientsTable extends Migration
             $table->string('email');
             $table->string('occupation');
             $table->string('token_watchband')->nullable();
-            $table->string('token_login')->nullable();
             $table->string('address');
             $table->string('city');
             $table->string('country');

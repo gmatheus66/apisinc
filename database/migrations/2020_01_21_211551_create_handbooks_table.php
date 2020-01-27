@@ -20,6 +20,15 @@ class CreateHandbooksTable extends Migration
             $table->integer('body_mass');
             $table->string('weight');
             $table->longText('reports');
+            $table->date('service_date');
+            $table->string('complaints');
+            $table->string('symptoms');
+            $table->string('vital_signs');
+            $table->enum('blood type', ['A+','A-','B+','B-','AB+','AB-','O+', 'O-']);
+            $table->string('blood_pressure');
+            $table->string('hgt');
+            $table->string('temperature');
+            
             $table->unsignedBigInteger('relative_id');
             $table->foreign('relative_id')->references('id')->on('relatives');
             $table->unsignedBigInteger('patient_id');

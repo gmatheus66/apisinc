@@ -16,7 +16,9 @@ class CreateRelativesPatientsTable extends Migration
         Schema::create('relatives_patients', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->enum('kinship_degree',[
-                'Grandparents', 'Mother', 'Father','Grandchild', 'Son','Sister','Broher', 'Wife','Husband','Girlfriend','Boyfriend','Other']);
+                'Grandparents', 'Mother', 'Father','Grandchild',
+                 'Son','Sister','Broher', 'Wife','Husband',
+                 'Girlfriend','Boyfriend','Other']);
             $table->unsignedBigInteger('relative_id');
             $table->foreign('relative_id')->references('id')->on('relatives');
             $table->unsignedBigInteger('patient_id');
