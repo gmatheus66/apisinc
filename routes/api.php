@@ -19,9 +19,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 
 Route::namespace('Api')->name('api.')->group(function(){
+    
+    //Route::post('/register', 'AuthController@register');
+    //Route::post('/login', 'AuthController@login');
+    //Route::get('/logout', 'AuthController@logout')->middleware('auth:api');
 
     Route::prefix('patient')->group(function(){
-        Route::get('/', 'PatientsController@index')->name('index');
+
+        Route::get('/', 'PatientsController@index')->name('index')->middleware('auth:api');
         Route::post('/register', 'PatientsController@register')->name('register_patient');
         Route::post('/login', 'PatientsController@login')->name('login_patient');
     });
