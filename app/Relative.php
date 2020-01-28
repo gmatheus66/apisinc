@@ -22,6 +22,13 @@ class relative extends Model
    ];
 
    protected $guarded = [
-   	'password',
+		'id',
+		'password',
+		
+	   
+   ];
+
+   protected $hidden = [
+		'password', 'remember_token'
    ];
 }

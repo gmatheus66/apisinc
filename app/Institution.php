@@ -4,18 +4,25 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class institution extends Model
+class Institution extends Model
 {
    protected $fillable = [
    	'name',
-   	'eni',
+   	'ENI',
    	'address',
    	'city',	
-   	'contry',
-   	'state_province',
+   	'country',
+	'state_province',
+	'zip',
    ];
 
    protected $guarded = [
-   	'eni',
+	   'name',
+	   'ENI',
+	   'address',
+	   'city',
+	   'country',
+	   'state_province',
+	   'zip',
    ];
 }
