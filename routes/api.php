@@ -42,4 +42,10 @@ Route::namespace('Api')->name('api.')->group(function(){
         Route::post('/register', 'RelativesController@register')->name('register_relatives');
         Route::post('/login', 'RelativesController@login')->name('login_register');
     });
+    Route::prefix('relativespatient')->group(function(){
+        Route::post('/register', 'RelativePatientController@register')->name('register_reslatives_patients');
+    });
+    Route::prefix('handbook')->group(function(){
+        Route::post('/register', 'HandbookController@register')->name('register_handbook')->middleware('auth:api');
+    });
 });
