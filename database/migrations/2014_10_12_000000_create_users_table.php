@@ -19,6 +19,25 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('type',['Patient','Doctor','Relatives', 'Admin']);
+            //doctor
+            $table->integer('crm')->nullable();
+            $table->string('specialization')->nullable();
+
+            //patient
+            $table->string('token_watchband')->nullable();
+
+            //patient and relatives
+            $table->date('birthday')->nullable();
+            $table->enum('sex',['Male','Female','Another'])->nullable();
+            $table->integer('telephone')->nullable();
+            $table->string('occupation')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->string('state_province')->nullable();
+            $table->string('zip')->nullable();
+
             $table->rememberToken();
             $table->timestamps();
         });

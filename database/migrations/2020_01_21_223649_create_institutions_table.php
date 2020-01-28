@@ -16,10 +16,10 @@ class CreateInstitutionsTable extends Migration
         Schema::create('institutions', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->integer('ENI');
+            $table->integer('ENI');//cnpj
             $table->string('address');
             $table->string('city');
-            $table->string('contry');
+            $table->string('country');
             $table->string('state_province');
             $table->string('zip');
 
