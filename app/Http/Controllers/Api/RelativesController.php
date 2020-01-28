@@ -2,45 +2,20 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Patient;
 use App\User;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 
-class PatientsController extends Controller
+class RelativesController extends Controller
 {
-	private $patient;
 
-
-	public function __construct(User $p){
-		$this->patient = $p;
-	}
-
-    public function index(){
-		
-		if(auth()->user()->type == "Patient" || auth()->user()->type == "Relatives"){
-
-			return response()->json(['data' => ['msg' => 'This user is not allowed to perform this operation'] ]);
-		}
-		else{
-
-			if (sizeof($this->patient->all()) <= 0) {
-				return response()->json(['data'=>['msg'=> 'Patient does not exist']]);
-			}
-			else{
-				return response()->json([$this->patient->all(), auth()->user()->type],200);
-			}
-		}
-	}
-
-	public function register(Request $request){
-
-
-		$validator = Validator::make($request->all(),[
-			'name' => 'required|string|max:50|min:3',
+    public function register(Request $request){
+    
+        $validator = Validator::make($request->all(),[
+            'name' => 'required|string|max:50|min:3',
 			'birthday' => 'required|date',
 			'sex' => 'required|in:Male,Female,Another',
 			'telephone' => 'required|numeric',
@@ -52,15 +27,15 @@ class PatientsController extends Controller
 			'state_province' => 'required|string|min:2|max:20',
 			'zip' => 'required|numeric',
 			'password' => 'required',
-			'type' => 'required|in:Patient'
-		]);
-
-		if(sizeof($validator->errors()) > 0 ){
+			'type' => 'required|in:Relatives'
+        ]);
+        if(sizeof($validator->errors()) > 0 ){
 			return response()->json($validator->errors());
-		}
+        }
+        
+        try{
 
-		try{
-			$pat = User::create([
+            $rel = User::create([
 				'name' => $request->get('name'),
 				'birthday' => $request->get('birthday'),
 				'sex' => $request->get('sex'),
@@ -75,18 +50,20 @@ class PatientsController extends Controller
 				'password' => Hash::make($request->get('password')),
 				'type' => $request->get('type'),
 			]);
-			$accessToken = $pat->createToken('authToken')->accessToken;
+			$accessToken = $rel->createToken('authToken')->accessToken;
 
 			return response()->json(['data' => ['msg' => 'Patient successfully registered', $accessToken] ],200);
-		}
-		catch(Exception $e){
-			return response()->json($e);
-		}
-	}
 
-	public function login(Request $request){
+        }
+        catch(Exception $e){
+            return response()->json($e);
+        }
 
-		$loginData = $request->validate([
+    }
+
+    public function login(Request $request){
+
+        $loginData = $request->validate([
             'email' => 'email|required',
             'password' => 'required'
         ]);
@@ -99,21 +76,7 @@ class PatientsController extends Controller
 
         return response(['user' => auth()->user(), $accessToken]);
 
-	}
-
-	public function show($id){
-		if(auth()->user()->type == "Doctor"){
-			$user = User::find($id);
-			return response()->json($user);
-		}
-		else{
-			//Fazer select para o familiar so consultar quem for da familia dele
-			//e o usuario so retornar apenas dados dele
-			$user = User::find($id);
-			return response()->json($user);
-		}
-	}
+    }
 
 
 }
-	
