@@ -22,7 +22,7 @@ class CreatePatientsDiseasesTable extends Migration
                 'Son','Sister','Broher', 'Wife','Husband','Girlfriend',
                 'Boyfriend','Other'])->nullable();
             $table->unsignedBigInteger('patient_id');
-            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('patient_id')->references('id')->on('users');
             $table->unsignedBigInteger('handbooks_id');
             $table->foreign('handbooks_id')->references('id')->on('handbooks');
             $table->timestamps();

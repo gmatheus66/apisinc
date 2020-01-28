@@ -16,25 +16,24 @@ class CreateHandbooksTable extends Migration
         Schema::create('handbooks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name_handbook');
-            $table->enum('limitation',['Cognitive','Locomotion','Vision','hearing']);
+            $table->enum('limitation',['Cognitive','Locomotion','Vision','Hearing']);
             $table->integer('body_mass');
             $table->string('weight');
-            $table->longText('reports');
             $table->date('service_date');
-            $table->string('complaints');
-            $table->string('symptoms');
-            $table->string('vital_signs');
-            $table->enum('blood type', ['A+','A-','B+','B-','AB+','AB-','O+', 'O-']);
+            $table->longText('complaints');//reclamações
+            $table->string('symptoms');//sintomas
+            $table->string('vital_signs');//sinais vitais
+            $table->enum('blood_type', ['A+','A-','B+','B-','AB+','AB-','O+', 'O-']);
             $table->string('blood_pressure');
-            $table->string('hgt');
+            $table->string('hgt');//Nivel de glicose no sangue
             $table->string('temperature');
             
             $table->unsignedBigInteger('relative_id');
-            $table->foreign('relative_id')->references('id')->on('relatives');
+            $table->foreign('relative_id')->references('id')->on('users');
             $table->unsignedBigInteger('patient_id');
-            $table->foreign('patient_id')->references('id')->on('patients');
+            $table->foreign('patient_id')->references('id')->on('users');
             $table->unsignedBigInteger('doctor_id');
-            $table->foreign('doctor_id')->references('id')->on('doctors');
+            $table->foreign('doctor_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

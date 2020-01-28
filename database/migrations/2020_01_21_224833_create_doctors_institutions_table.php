@@ -18,7 +18,7 @@ class CreateDoctorsInstitutionsTable extends Migration
             $table->unsignedBigInteger('institution_id');
             $table->foreign('institution_id')->references('id')->on('institutions');
             $table->unsignedBigInteger('doctor_id');
-            $table->foreign('doctor_id')->references('id')->on('doctors');
+            $table->foreign('doctor_id')->references('id')->on('users');
             $table->timestamps();
         });
     }
