@@ -38,7 +38,7 @@ class InstitutionsController extends Controller
 
         }
         catch(Exception $e){
-
+            return response()->json($e);
         }
         
     }

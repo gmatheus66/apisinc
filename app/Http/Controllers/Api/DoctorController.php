@@ -75,7 +75,7 @@ class DoctorController extends Controller
             'email' => 'email|required',
             'password' => 'required'
         ]);
- 
+
         if(!auth()->attempt($loginData)) {
             return response(['message'=>'Invalid credentials']);
         }

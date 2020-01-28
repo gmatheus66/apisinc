@@ -32,6 +32,8 @@ class RelativesController extends Controller
         if(sizeof($validator->errors()) > 0 ){
 			return response()->json($validator->errors());
         }
+        if(auth()->user()->type == "Doctor"){
+
         
         try{
 
@@ -52,11 +54,12 @@ class RelativesController extends Controller
 			]);
 			$accessToken = $rel->createToken('authToken')->accessToken;
 
-			return response()->json(['data' => ['msg' => 'Patient successfully registered', $accessToken] ],200);
+			return response()->json(['data' => ['msg' => 'Relatives successfully registered', $accessToken] ],200);
 
         }
         catch(Exception $e){
             return response()->json($e);
+        }
         }
 
     }

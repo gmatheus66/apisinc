@@ -52,7 +52,8 @@ class PatientsController extends Controller
 			'state_province' => 'required|string|min:2|max:20',
 			'zip' => 'required|numeric',
 			'password' => 'required',
-			'type' => 'required|in:Patient'
+			'type' => 'required|in:Patient',
+		
 		]);
 
 		if(sizeof($validator->errors()) > 0 ){
