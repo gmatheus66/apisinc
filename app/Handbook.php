@@ -7,12 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 class Handbook extends Model
 {
 	protected $fillable = [
-		'handbooks',
-		'open_date',
+		'name_handbook',
 		'limitation',
 		'body_mass',
-		'Weight','
-		report'
+		'weight',
+		'service_date',
+		'complaints',
+		'symptoms',
+		'vital_signs',
+		'blood_type',
+		'blood_pressure',
+		'hgt',
+		'temperature',
+		'relative_id',
+		'patient_id',
+		'doctor_id'
 	];
 	protected $guarded = [
 		'id',

@@ -24,7 +24,6 @@ class relative extends Model
    protected $guarded = [
 		'id',
 		'password',
-		
 	   
    ];
 
