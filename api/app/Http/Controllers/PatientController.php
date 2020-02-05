@@ -92,7 +92,9 @@ class PatientController extends Controller
 		return $this->respondWithToken($token);
     }
     
-    
+    public function detail_auth_user(){
+		return auth('patient')->user();
+	}
     
 
 

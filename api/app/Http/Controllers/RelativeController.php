@@ -92,6 +92,10 @@ class RelativeController extends Controller
         }
 
 		return $this->respondWithToken($token);
+    }
+    
+    public function detail_auth_user(){
+		return auth()->user();
 	}
 }
 

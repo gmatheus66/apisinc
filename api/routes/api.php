@@ -35,3 +35,11 @@ Route::group(['prefix' => 'doctor','middleware' => ['assign.guard:doctors','jwt.
 {
 	Route::post('/handbook/register','HandbookController@register')->name('register_handbook');	
 });
+Route::group(['prefix' => 'relative','middleware' => ['assign.guard:relatives','jwt.auth']],function ()
+{
+	Route::get('/detail','RelativeController@detail_auth_user')->name('detail_relative');	
+});
+Route::group(['prefix' => 'patient','middleware' => ['assign.guard:patient','jwt.auth']],function ()
+{
+	Route::get('/detail','PatientController@detail_auth_user')->name('detail_relative');	
+});
