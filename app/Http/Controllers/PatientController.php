@@ -7,7 +7,10 @@ use App\Patient;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
-
+use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
+use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class PatientController extends Controller
 {
@@ -70,8 +73,11 @@ class PatientController extends Controller
     
     public function logout()
     {
+		config([
+            'jwt.blacklist_enabled' => true
+        ]);
         auth('patient')->logout();
-
+		auth('patient')->invalidate(auth('patient')->parseToken());
         return response()->json(['message' => 'Successfully logged out']);
     }
 
@@ -95,8 +101,37 @@ class PatientController extends Controller
     public function detail_auth_user(){
 		return auth('patient')->user();
 	}
-    
+	
+	public function check_user(){
 
-
+		try{
+		 	return response()->json(auth('patient')->check());
+		}
+		catch (UnauthorizedHttpException $e) {
+			return response()->json(false);
+		} 
+		catch (TokenBlacklistedException $e) {
+			return response()->json(false);
+		} 
+		catch (TokenExpiredException $e) {
+			return response()->json(false);
+		} 
+		catch (TokenInvalidException $e) {
+			return response()->json(false);
+		} 
+		catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+			return response()->json(false);
+		} 
+		catch (Tymon\JWTAuth\Exceptions\TokenBlacklistedException $e) {
+			return response()->json(false);
+		} 
+		catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+			return response()->json(false);
+		}
+		catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+			return response()->json(false);
+		}
+		
+	}
 
 }
