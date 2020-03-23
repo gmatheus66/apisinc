@@ -41,5 +41,6 @@ Route::group(['prefix' => 'relative','middleware' => ['assign.guard:relatives','
 });
 Route::group(['prefix' => 'patient','middleware' => ['assign.guard:patient','jwt.auth']],function ()
 {
-	Route::get('/detail','PatientController@detail_auth_user')->name('detail_relative');	
+	Route::get('/detail','PatientController@detail_auth_user')->name('detail_patient');
+	Route::get('/check', 'PatientController@check_user')->name('check_patient');
 });
