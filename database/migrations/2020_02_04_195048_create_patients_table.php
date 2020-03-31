@@ -19,7 +19,7 @@ class CreatePatientsTable extends Migration
             $table->string('password');
             $table->date('birthday');
             $table->enum('sex',['Male','Female','Another']);
-            $table->integer('telephone');
+            $table->bigInteger('telephone');
             $table->string('email')->unique();
             $table->string('occupation');
             $table->string('token_watchband')->nullable();

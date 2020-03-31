@@ -20,7 +20,7 @@ class CreateRelativesTable extends Migration
             $table->string('email')->unique();
             $table->date('birthday');
             $table->enum('sex',['Male','Female','Another']);
-            $table->integer('telephone');
+            $table->bigInteger('telephone');
             $table->string('occupation');
             $table->string('address');
             $table->string('city');
