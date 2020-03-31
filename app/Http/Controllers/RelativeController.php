@@ -17,7 +17,7 @@ class RelativeController extends Controller
 			'birthday' => 'required|date',
 			'sex' => 'required|in:Male,Female,Another',
 			'telephone' => 'required|numeric',
-			'email' => 'required|max:50|min:10|unique:users,email',
+			'email' => 'required|max:50|min:10|unique:relatives,email',
 			'occupation' => 'required|string|max:50|min:5',
 			'address' => 'required|string|max:60|min:5',
 			'city' => 'required|string|max:25|min:2',
