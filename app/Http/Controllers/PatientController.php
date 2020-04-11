@@ -14,6 +14,15 @@ use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 
 class PatientController extends Controller
 {
+	public function get_all_patient_relatives(){
+		$patients = Patient::all();
+		return response()->json($patients);
+	}
+	public function get_all_patient_doctor(){
+		$patients = Patient::all();
+		return response()->json($patients);
+	}
+
     public function register(Request $request){
 
 
