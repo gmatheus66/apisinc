@@ -96,6 +96,38 @@ class RelativeController extends Controller
     
     public function detail_auth_user(){
 		return auth()->user();
+    }
+    
+    public function check_user(){
+
+		try{
+		 	return response()->json(auth('relatives')->check());
+		}
+		catch (UnauthorizedHttpException $e) {
+			return response()->json(false);
+		} 
+		catch (TokenBlacklistedException $e) {
+			return response()->json(false);
+		} 
+		catch (TokenExpiredException $e) {
+			return response()->json(false);
+		} 
+		catch (TokenInvalidException $e) {
+			return response()->json(false);
+		} 
+		catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
+			return response()->json(false);
+		} 
+		catch (Tymon\JWTAuth\Exceptions\TokenBlacklistedException $e) {
+			return response()->json(false);
+		} 
+		catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
+			return response()->json(false);
+		}
+		catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
+			return response()->json(false);
+		}
+		
 	}
 }
 
