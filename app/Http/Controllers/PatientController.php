@@ -11,6 +11,7 @@ use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Illuminate\Support\Facades\DB;
 
 class PatientController extends Controller
 {
@@ -19,9 +20,8 @@ class PatientController extends Controller
 		return response()->json($patients);
 	}
 	public function get_all_patient_doctor(){
-		$patients = Patient::all();
-
-		return response()->json($patients->id,$patient->name);
+		$patients = DB::select('select id, name from patients');
+		return response()->json($patients);
 	}
 
     public function register(Request $request){
