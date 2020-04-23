@@ -20,7 +20,8 @@ class PatientController extends Controller
 	}
 	public function get_all_patient_doctor(){
 		$patients = Patient::all();
-		return response()->json($patients);
+
+		return response()->json($patients->id,$patient->name);
 	}
 
     public function register(Request $request){
