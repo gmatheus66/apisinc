@@ -13,6 +13,8 @@ class PatientSeeder extends Seeder
      */
     public function run()
     {
+        $pats = factory(Patient::class, 10)->create();
+
         $faker = Faker\Factory::create();
 
         Patient::create([
