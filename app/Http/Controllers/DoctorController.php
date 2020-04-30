@@ -11,6 +11,9 @@ use Illuminate\Support\Facades\Validator;
 
 class DoctorController extends Controller
 {
+	public function detail_auth_user(){
+		return auth('doctors')->user();
+	}
     public function register(Request $request){
 
 		$validator = Validator::make($request->all(),[
