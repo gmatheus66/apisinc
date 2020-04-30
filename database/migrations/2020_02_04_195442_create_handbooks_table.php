@@ -16,7 +16,7 @@ class CreateHandbooksTable extends Migration
         Schema::create('handbooks', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name_handbook');
-            $table->enum('limitation',['Cognitive','Locomotion','Vision','Hearing']);
+            $table->enum('limitation',['Cognitive','Locomotion','Vision','Hearing','None']);
             $table->integer('body_mass');
             $table->string('weight');
             $table->date('service_date');
@@ -27,7 +27,7 @@ class CreateHandbooksTable extends Migration
             $table->string('blood_pressure');
             $table->string('hgt');//Nivel de glicose no sangue
             $table->string('temperature');
-            $table->unsignedBigInteger('relative_id');
+            $table->unsignedBigInteger('relative_id')->nullable();
             $table->foreign('relative_id')->references('id')->on('relatives');
             $table->unsignedBigInteger('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients');
