@@ -23,7 +23,7 @@ class HandbookController extends Controller
             'blood_pressure' => 'required|numeric|between:0,199.99',
             'hgt' => 'required|numeric|between:0,199.99',
             'temperature' => 'required',
-            'relative_id' => 'required|min:1|max:2',
+            'relative_id' => 'min:1|max:2',
             'patient_id' => 'required|min:1|max:2',
             'doctor_id' => 'required|min:1|max:2'
         ]);
