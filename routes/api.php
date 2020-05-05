@@ -35,6 +35,7 @@ Route::group(['prefix' => 'doctor','middleware' => ['assign.guard:doctors','jwt.
 	Route::post('/handbook/register','HandbookController@register')->name('register_handbook');	
 	Route::get('/patient', 'PatientController@get_all_patient_doctor')->name('patient_relative');
 	Route::get('/check', 'DoctorController@check_user')->name('check_doctor');
+	Route::get('/detail','DoctorController@detail_auth_user')->name('detail_doctor');	
 });
 Route::group(['prefix' => 'relative','middleware' => ['assign.guard:relatives','jwt.auth']],function ()
 {
