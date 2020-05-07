@@ -17,7 +17,7 @@ class CreateHandbooksTable extends Migration
             $table->bigIncrements('id');
             $table->string('name_handbook');
             $table->enum('limitation',['Cognitive','Locomotion','Vision','Hearing','None']);
-            $table->integer('body_mass');
+            $table->string('body_mass');
             $table->string('weight');
             $table->date('service_date');
             $table->longText('complaints');//reclamações
