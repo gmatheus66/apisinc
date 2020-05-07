@@ -13,7 +13,7 @@ class HandbookController extends Controller
         $validator = Validator::make($request->all(),[
             'name_handbook' => 'required|min:5|max:50',
             'limitation' => 'required|in:Cognitive,Locomotion,Vision,Hearing',
-            'body_mass' => 'required|numeric|between:0,199.99',
+            'body_mass' => 'required|numeric|between:0,999.99',
             'weight' => 'required|numeric|between:0,299.99',
             'service_date' => 'required|date',
             'complaints' => 'required|max:500',
@@ -21,7 +21,7 @@ class HandbookController extends Controller
             'vital_signs' => 'required|max:50',
             'blood_type' => 'required|in:A+,A-,B+,B-,AB+,AB-,O+,O-',
             'blood_pressure' => 'required|numeric|between:0,199.99',
-            'hgt' => 'required|numeric|between:0,199.99',
+            'hgt' => 'required|numeric|between:0,199',
             'temperature' => 'required',
             'relative_id' => 'min:1|max:2',
             'patient_id' => 'required|min:1|max:2',
