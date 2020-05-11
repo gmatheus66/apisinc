@@ -10,7 +10,6 @@ class HeartRateController extends Controller
 {
     public function register(Request $request){
 
-        return \response()->json($request);
         $validator = Validator::make($request->all(), [
             'patient_id' => 'required|min:1|max:2',
             'date_measurement' => 'required',
