@@ -48,4 +48,8 @@ class Relative extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function relationship_patient(){
+        return $this->hasMany('App\RelativePatient');
+    }
 }

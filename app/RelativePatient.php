@@ -16,4 +16,10 @@ class RelativePatient extends Model
         'created_at',
         'update_at'
     ];
+    public function inverse_relationship_relative(){
+        return $this->belongsTo('App\Relative');
+    }
+    public function inverse_relationship_patient(){
+        return $this->belongsTo('App\Patient');
+    }
 }
