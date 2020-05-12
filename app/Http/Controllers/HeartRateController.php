@@ -16,7 +16,7 @@ class HeartRateController extends Controller
             'heart' => 'required' 
         ]);
 
-        if(sizeof($validator->errors() > 0)){
+        if(sizeof($validator->errors()) > 0){
             return response()->json($validator->errors());
         }
         try{
