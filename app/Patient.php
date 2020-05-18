@@ -56,4 +56,7 @@ class Patient extends Authenticatable implements JWTSubject
 	public function relationship_heart_rate(){
         return $this->hasMany('App\HeartRate');
     }
+	public function relationship_handbook(){
+        return $this->hasMany('App\Handbook');
+    }
 }
