@@ -50,5 +50,5 @@ Route::group(['prefix' => 'patient','middleware' => ['assign.guard:patient','jwt
 	Route::get('/detail','PatientController@detail_auth_user')->name('detail_patient');
 	Route::get('/check', 'PatientController@check_user')->name('check_patient');
 	Route::post('/register/heart', 'HeartRateController@register')->name('register_heart_rate_patient');
-	Route::post('/register/getheart', 'HeartRateController@get_heart_rates')->name('get_heart_rate_patient');
+	Route::get('/register/getheart', 'HeartRateController@get_heart_rates')->name('get_heart_rate_patient');
 });
