@@ -28,4 +28,7 @@ class Handbook extends Model
 		'created_at',
 		'update_at',
 	];
+	public function relationship_patient(){
+        return $this->belongTo('App\Patient');
+    }
 }
