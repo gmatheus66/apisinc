@@ -4,10 +4,32 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 use App\Handbook;
 
 class HandbookController extends Controller
 {
+    public function get_handbook_patient(){
+        
+        if(DB::select('select name_handbook,patient_id, service_date, doctor_id from handbooks where patient_id = :id',['id', auth('patient')->user()->id ] ) ){
+            return response()->json( DB::select('select name_handbook,patient_id, service_date, doctor_id from handbooks where patient_id = :id',['id', auth('patient')->user()->id ] ) );
+        }
+        else{
+            return response()->json( ['data' => ['msg' => 'This user has no registered medical records']] );
+        }
+    }
+    public function get_detail_handbook_patient($id){
+        $validate = Validator::make(['id' => $id] ,['id' => 'min:24|max:24']);
+
+        if($validate->fails()) return view('index')->with('validate', $validate->errors());
+
+        if(Handbook::where('patient_id', auth()->user()->id )->get()){
+            return response()->json( Handbook::where('patient_id', auth()->user()->id )->get() );
+        }
+        else{
+            return response()->json( ['data' => ['msg' => 'This user has no registered medical records']] );
+        }
+    }
     public function register(Request $request){
 
         $validator = Validator::make($request->all(),[
