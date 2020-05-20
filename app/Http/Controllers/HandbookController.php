@@ -10,21 +10,22 @@ use App\Handbook;
 class HandbookController extends Controller
 {
     public function get_handbook_patient(){
-        
-        if(DB::select('select name_handbook,patient_id, service_date, doctor_id from handbooks where patient_id = :id',['id', auth('patient')->user()->id ] ) ){
-            return response()->json( DB::select('select name_handbook,patient_id, service_date, doctor_id from handbooks where patient_id = :id',['id', auth('patient')->user()->id ] ) );
+
+        if( Handbook::select('id','name_handbook','patient_id', 'service_date', 'doctor_id' )->where('patient_id', auth('patient')->user()->id )->get() ){
+            return response()->json( Handbook::select('id','name_handbook','patient_id', 'service_date', 'doctor_id' )->where('patient_id', auth('patient')->user()->id )->get()  );
         }
         else{
             return response()->json( ['data' => ['msg' => 'This user has no registered medical records']] );
         }
+
     }
     public function get_detail_handbook_patient($id){
-        $validate = Validator::make(['id' => $id] ,['id' => 'min:24|max:24']);
+        $validate = Validator::make(['id' => $id] ,['id' => 'min:1|max:24']);
 
-        if($validate->fails()) return view('index')->with('validate', $validate->errors());
+        if($validate->fails()) return response()->json($validate->errors());
 
-        if(Handbook::where('patient_id', auth()->user()->id )->get()){
-            return response()->json( Handbook::where('patient_id', auth()->user()->id )->get() );
+        if(Handbook::where('patient_id', auth()->user()->id )->where('id', $id)->get()){
+            return response()->json( Handbook::where('patient_id', auth()->user()->id )->where('id', $id)->get() );
         }
         else{
             return response()->json( ['data' => ['msg' => 'This user has no registered medical records']] );
@@ -47,7 +48,7 @@ class HandbookController extends Controller
             'temperature' => 'required',
             'relative_id' => 'min:1|max:2',
             'patient_id' => 'required|min:1|max:2',
-            'doctor_id' => 'required|min:1|max:2'
+
         ]);
         if(sizeof($validator->errors()) > 0){
 			return response()->json($validator->errors());
@@ -68,12 +69,12 @@ class HandbookController extends Controller
                 'hgt' => $request->get('hgt'),
                 'relative_id' => $request->get('relative_id'),
                 'patient_id' => $request->get('patient_id'),
-                'doctor_id' => $request->get('doctor_id'),
+                'doctor_id' => auth('doctors')->user()->id,
                 'temperature' => $request->get('temperature')
                 ]);
-                
+
                 return response()->json(['data' => ['msg' => 'Handbook registed successfully'] ],200);
-                
+
         }
         catch(Exception $e){
             return response()->json($e);
