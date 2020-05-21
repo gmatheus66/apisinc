@@ -46,8 +46,8 @@ class HandbookController extends Controller
             'blood_pressure' => 'required|numeric',
             'hgt' => 'required|numeric',
             'temperature' => 'required',
-            'relative_id' => 'min:1|max:2',
-            'patient_id' => 'required|min:1|max:2',
+            'relative_id' => 'min:1',
+            'patient_id' => 'required|min:1',
 
         ]);
         if(sizeof($validator->errors()) > 0){
