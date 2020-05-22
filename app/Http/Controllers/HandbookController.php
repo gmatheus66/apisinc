@@ -6,13 +6,24 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Handbook;
+use App\Doctor;
 
 class HandbookController extends Controller
 {
     public function get_handbook_patient(){
 
         if( Handbook::select('id','name_handbook','patient_id', 'service_date', 'doctor_id' )->where('patient_id', auth('patient')->user()->id )->get() ){
-            return response()->json( Handbook::select('id','name_handbook','patient_id', 'service_date', 'doctor_id' )->where('patient_id', auth('patient')->user()->id )->get()  );
+
+            $handbooks_data = Handbook::select('id','name_handbook','patient_id', 'service_date', 'doctor_id' )->where('patient_id', auth('patient')->user()->id )->get();
+            $handbooks_array = json_decode($handbooks_data ,true);;
+            $new_handbooks_array = [];
+            foreach($handbooks_array as $value_handbooks){
+                $doctor_name = Doctor::select('name')->where('id',$value_handbooks["doctor_id"])->get();
+                $doctor = ['doctor_name' => $doctor_name[0]->name ];
+                $value = array_merge($value_handbooks,$doctor);
+                array_push($new_handbooks_array, $value);
+            }
+            return response()->json($new_handbooks_array);
         }
         else{
             return response()->json( ['data' => ['msg' => 'This user has no registered medical records']] );
