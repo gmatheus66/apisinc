@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use App\Handbook;
 use App\Doctor;
+use App\Patient;
 
 class HandbookController extends Controller
 {
@@ -30,6 +31,27 @@ class HandbookController extends Controller
         }
 
     }
+    public function get_handbook_doctor(){
+
+        if( Handbook::select('id','name_handbook','patient_id', 'service_date', 'doctor_id' )->where('doctor_id', auth('doctors')->user()->id )->get() ){
+
+            $handbooks_data = Handbook::select('id','name_handbook','patient_id', 'service_date', 'doctor_id' )->where('doctor_id', auth('doctors')->user()->id )->get();
+            $handbooks_array = json_decode($handbooks_data ,true);;
+            $new_handbooks_array = [];
+            foreach($handbooks_array as $value_handbooks){
+                $patient_name = Patient::select('name')->where('id',$value_handbooks["patient_id"])->get();
+                $patient = ['patient_name' => $patient_name[0]->name ];
+                $value = array_merge($value_handbooks,$patient);
+                array_push($new_handbooks_array, $value);
+            }
+            return response()->json($new_handbooks_array);
+        }
+        else{
+            return response()->json( ['data' => ['msg' => 'This user has no registered medical records']] );
+        }
+
+    }
+
     public function get_detail_handbook_patient($id){
         $validate = Validator::make(['id' => $id] ,['id' => 'min:1|max:24']);
 
