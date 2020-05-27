@@ -32,14 +32,15 @@ Route::post('/relative/logout', 'RelativeController@logout')->name('login_logout
 
 Route::group(['prefix' => 'doctor','middleware' => ['assign.guard:doctors','jwt.auth']],function ()
 {
-	Route::post('/handbook/register','HandbookController@register')->name('register_handbook');	
+	Route::post('/handbook/register','HandbookController@register')->name('register_handbook');
 	Route::get('/patient', 'PatientController@get_all_patient_doctor')->name('patient_relative');
 	Route::get('/check', 'DoctorController@check_user')->name('check_doctor');
-	Route::get('/detail','DoctorController@detail_auth_user')->name('detail_doctor');	
+    Route::get('/detail','DoctorController@detail_auth_user')->name('detail_doctor');
+    Route::get('/gethandbook', 'HandbookController@get_handbook_doctor')->name('get_handbook_doctor');
 });
 Route::group(['prefix' => 'relative','middleware' => ['assign.guard:relatives','jwt.auth']],function ()
 {
-	Route::get('/detail','RelativeController@detail_auth_user')->name('detail_relative');	
+	Route::get('/detail','RelativeController@detail_auth_user')->name('detail_relative');
 	Route::get('/patients', 'PatientController@get_all_patient_relatives')->name('patient_relative');
 	Route::get('/patient', 'RelativePatientController@get_my_patient_relatives')->name('patient_relative');
 	Route::post('/register/patient', 'RelativePatientController@register')->name('register_patient_relative');
