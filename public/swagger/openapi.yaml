@@ -1,0 +1,12 @@
+openapi: 3.0.0
+info:
+  title: 'SIMC OpenApi'
+  description: 'Api para criaçao e gerenciamento de prontuarios, juntamente com analise de batimentos cardiacos'
+  version: 1.0.0
+paths:
+  /:
+    get:
+      description: 'Home page'
+      responses:
+        default:
+          description: 'Welcome page'

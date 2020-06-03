@@ -1,0 +1,38 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "SIMC Documentation",
+        "description": "Api para criaçao e gerenciamento de prontuarios, juntamente com analise de batimentos cardiacos",
+        "contact": {
+            "url": "https://github.com/gmatheus66"
+        },
+        "license": {
+            "name": "License: MIT"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api/",
+            "description": "Demo API Server"
+        }
+    ],
+    "paths": {
+        "/": {
+            "get": {
+                "description": "Home page",
+                "responses": {
+                    "default": {
+                        "description": "Welcome page"
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Simc Projects",
+            "description": "API Endpoints of Simc Projects"
+        }
+    ]
+}
