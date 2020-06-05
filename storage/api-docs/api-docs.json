@@ -13,8 +13,8 @@
     },
     "servers": [
         {
-            "url": "http://localhost/api/",
-            "description": "Demo API Server"
+            "url": "https://apisimc.herokuapp.com/api",
+            "description": "API Server"
         }
     ],
     "paths": {
@@ -27,12 +27,214 @@
                     }
                 }
             }
+        },
+        "/doctor/logout": {
+            "post": {
+                "tags": [
+                    "Doctor"
+                ],
+                "description": "Login Doctor",
+                "operationId": "App\\Http\\Controllers\\DoctorController::logout",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/doctor/login": {
+            "post": {
+                "tags": [
+                    "Doctor"
+                ],
+                "description": "Login Doctor",
+                "operationId": "App\\Http\\Controllers\\DoctorController::login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/relative/patients": {
+            "get": {
+                "tags": [
+                    "Relative"
+                ],
+                "description": "Returns a list of patients for the relative",
+                "operationId": "App\\Http\\Controllers\\PatientController::get_all_patient_relatives",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/patient/logout": {
+            "post": {
+                "tags": [
+                    "Patient"
+                ],
+                "description": "Logout Patient",
+                "operationId": "App\\Http\\Controllers\\PatientController::logout",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/patient/login": {
+            "post": {
+                "tags": [
+                    "Patient"
+                ],
+                "description": "Login Patient",
+                "operationId": "App\\Http\\Controllers\\PatientController::login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/relative/logout": {
+            "post": {
+                "tags": [
+                    "Relative"
+                ],
+                "description": "Login Relative",
+                "operationId": "App\\Http\\Controllers\\RelativeController::logout",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/relative/login": {
+            "post": {
+                "tags": [
+                    "Relative"
+                ],
+                "description": "Login Relative",
+                "operationId": "App\\Http\\Controllers\\RelativeController::login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "securitySchemes": {
+            "apiAuth": {
+                "type": "http",
+                "description": "Login with email and password to get the authentication token",
+                "name": "Token based Based",
+                "in": "header",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
         }
     },
     "tags": [
         {
-            "name": "Simc Projects",
-            "description": "API Endpoints of Simc Projects"
+            "name": "Patient",
+            "description": "Endpoints Patients"
+        },
+        {
+            "name": "Relative",
+            "description": "Endpoints Relatives"
+        },
+        {
+            "name": "Doctor",
+            "description": "Endpoints Doctors"
         }
     ]
 }

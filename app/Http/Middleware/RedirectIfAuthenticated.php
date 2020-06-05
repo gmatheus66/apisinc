@@ -8,6 +8,19 @@ use Illuminate\Support\Facades\Auth;
 
 class RedirectIfAuthenticated
 {
+
+    /**
+    * @OA\SecurityScheme(
+    *     type="http",
+    *     description="Login with email and password to get the authentication token",
+    *     name="Token based Based",
+    *     in="header",
+    *     scheme="bearer",
+    *     bearerFormat="JWT",
+    *     securityScheme="apiAuth",
+    * )
+    */
+    
     /**
      * Handle an incoming request.
      *
