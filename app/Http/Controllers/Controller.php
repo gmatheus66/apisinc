@@ -23,15 +23,22 @@ class Controller extends BaseController
      * )
      *
      * @OA\Server(
-     *      url=L5_SWAGGER_CONST_HOST,
-     *      description="Demo API Server"
+     *      url="https://apisimc.herokuapp.com/api",
+     *      description="API Server"
      * )
-
-     *
      * @OA\Tag(
-     *     name="Simc Projects",
-     *     description="API Endpoints of Simc Projects"
+     *     name="Patient",
+     *     description="Endpoints Patients",
      * )
+     * @OA\Tag(
+     *     name="Relative",
+     *     description="Endpoints Relatives",
+     * )
+     * @OA\Tag(
+     *     name="Doctor",
+     *     description="Endpoints Doctors",
+     * )
+     *
      *  @OA\Get(
      *     path="/",
      *     description="Home page",
