@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class RelativeController extends Controller
 {
     public function register(Request $request){
-    
+
         $validator = Validator::make($request->all(),[
             'name' => 'required|string|max:50|min:3',
 			'birthday' => 'required|date',
@@ -30,7 +30,7 @@ class RelativeController extends Controller
 			return response()->json($validator->errors());
         }
 
-        
+
         try{
 
             $rel = Relative::create([
@@ -47,7 +47,7 @@ class RelativeController extends Controller
 				'zip' => $request->get('zip'),
 				'password' => Hash::make($request->get('password')),
             ]);
-            
+
             $token = auth('relatives')->login($rel);
 
 			return $this->respondWithToken($token);
@@ -68,8 +68,26 @@ class RelativeController extends Controller
             'user' => auth('relatives')->user()
         ]);
 	}
-	
 
+    /**
+    * @OA\Post(
+    *     path="/relative/logout",
+    *     description="Login Relative",
+    *     tags={"Relative"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function logout()
     {
         auth('relatives')->logout();
@@ -77,14 +95,45 @@ class RelativeController extends Controller
         return response()->json(['message' => 'Successfully logged out']);
     }
 
+    /**
+    * @OA\Post(
+    *     path="/relative/login",
+    *     description="Login Relative",
+    *     tags={"Relative"},
+    *     @OA\Parameter(
+    *         name="email",
+    *         in="query",
+    *         description="Email",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="password",
+    *         in="query",
+    *         description="Password",
+    *         required=true,
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function login(Request $request){
 
 		$loginData = $request->validate([
             'email' => 'email|required',
             'password' => 'required'
 		]);
-		
-		
+
+
 		$credentials = request(['email', 'password']);
 
         if (! $token = auth('relatives')->attempt($credentials)) {
@@ -93,11 +142,11 @@ class RelativeController extends Controller
 
 		return $this->respondWithToken($token);
     }
-    
+
     public function detail_auth_user(){
 		return auth()->user();
     }
-    
+
     public function check_user(){
 
 		try{
@@ -105,29 +154,29 @@ class RelativeController extends Controller
 		}
 		catch (UnauthorizedHttpException $e) {
 			return response()->json(false);
-		} 
+		}
 		catch (TokenBlacklistedException $e) {
 			return response()->json(false);
-		} 
+		}
 		catch (TokenExpiredException $e) {
 			return response()->json(false);
-		} 
+		}
 		catch (TokenInvalidException $e) {
 			return response()->json(false);
-		} 
+		}
 		catch (Tymon\JWTAuth\Exceptions\TokenExpiredException $e) {
 			return response()->json(false);
-		} 
+		}
 		catch (Tymon\JWTAuth\Exceptions\TokenBlacklistedException $e) {
 			return response()->json(false);
-		} 
+		}
 		catch (Tymon\JWTAuth\Exceptions\TokenInvalidException $e) {
 			return response()->json(false);
 		}
 		catch (Tymon\JWTAuth\Exceptions\JWTException $e) {
 			return response()->json(false);
 		}
-		
+
 	}
 }
 
