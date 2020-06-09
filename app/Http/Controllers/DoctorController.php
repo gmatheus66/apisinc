@@ -11,9 +11,77 @@ use Illuminate\Support\Facades\Validator;
 
 class DoctorController extends Controller
 {
+    /**
+    * @OA\Get(
+    *     path="/doctor/detail",
+    *     description="Returns a detail doctor",
+    *     tags={"Doctor"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
 	public function detail_auth_user(){
 		return auth('doctors')->user();
-	}
+    }
+    /**
+    * @OA\Post(
+    *     path="/doctor/register",
+    *     description="Doctor Register",
+    *     tags={"Doctor"},
+    *     @OA\Parameter(
+    *         name="name",
+    *         in="query",
+    *         description="Name",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="email",
+    *         in="query",
+    *         description="Email",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="crm",
+    *         in="query",
+    *         description="Crm",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="specialization",
+    *         in="query",
+    *         description="Specialization",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="password",
+    *         in="query",
+    *         description="Password",
+    *         required=true,
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function register(Request $request){
 
 		$validator = Validator::make($request->all(),[
@@ -130,7 +198,25 @@ class DoctorController extends Controller
 
 		return $this->respondWithToken($token);
 	}
-
+    /**
+    * @OA\Get(
+    *     path="/doctor/check",
+    *     description="Returns a check Doctor",
+    *     tags={"Doctor"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
 	public function check_user(){
 
 		try{
