@@ -10,6 +10,97 @@ use Illuminate\Support\Facades\Validator;
 
 class RelativeController extends Controller
 {
+    /**
+    * @OA\Post(
+    *     path="/relative/register",
+    *     description="Relative Register",
+    *     tags={"Relative"},
+    *     @OA\Parameter(
+    *         name="name",
+    *         in="query",
+    *         description="Name",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="birthday",
+    *         in="query",
+    *         description="Birthday",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="sex",
+    *         in="query",
+    *         description="Sex",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="telephone",
+    *         in="query",
+    *         description="Telephone",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="email",
+    *         in="query",
+    *         description="Email",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="occupation",
+    *         in="query",
+    *         description="Occupation",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="address",
+    *         in="query",
+    *         description="Address",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="city",
+    *         in="query",
+    *         description="City",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="country",
+    *         in="query",
+    *         description="Country",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="state_province",
+    *         in="query",
+    *         description="State Province",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="zip",
+    *         in="query",
+    *         description="Zip",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="password",
+    *         in="query",
+    *         description="Password",
+    *         required=true,
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function register(Request $request){
 
         $validator = Validator::make($request->all(),[
@@ -142,11 +233,47 @@ class RelativeController extends Controller
 
 		return $this->respondWithToken($token);
     }
-
+    /**
+    * @OA\Get(
+    *     path="/relative/detail",
+    *     description="Returns a detail Relative",
+    *     tags={"Relative"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function detail_auth_user(){
 		return auth()->user();
     }
-
+    /**
+    * @OA\Get(
+    *     path="/relative/check",
+    *     description="Returns a check Relative",
+    *     tags={"Relative"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function check_user(){
 
 		try{
