@@ -11,6 +11,25 @@ use App\Patient;
 
 class HandbookController extends Controller
 {
+    /**
+    * @OA\Get(
+    *     path="/patient/gethandbook",
+    *     description="Returns patient records",
+    *     tags={"Patient"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function get_handbook_patient(){
 
         if( Handbook::select('id','name_handbook','patient_id', 'service_date', 'doctor_id' )->where('patient_id', auth('patient')->user()->id )->get() ){
@@ -31,6 +50,25 @@ class HandbookController extends Controller
         }
 
     }
+    /**
+    * @OA\Get(
+    *     path="/doctor/gethandbook",
+    *     description="Returns doctor records",
+    *     tags={"Doctor"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function get_handbook_doctor(){
 
         if( Handbook::select('id','name_handbook','patient_id', 'service_date', 'doctor_id' )->where('doctor_id', auth('doctors')->user()->id )->get() ){
@@ -51,7 +89,25 @@ class HandbookController extends Controller
         }
 
     }
-
+    /**
+    * @OA\Get(
+    *     path="/patient/gethandbook/",
+    *     description="Returns patient records detail",
+    *     tags={"Patient"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function get_detail_handbook_patient($id){
         $validate = Validator::make(['id' => $id] ,['id' => 'min:1|max:24']);
 
@@ -64,6 +120,109 @@ class HandbookController extends Controller
             return response()->json( ['data' => ['msg' => 'This user has no registered medical records']] );
         }
     }
+    /**
+    * @OA\Post(
+    *     path="/doctor/handbook/register",
+    *     description="Handbook Register",
+    *     tags={"Doctor"},
+    *     @OA\Parameter(
+    *         name="name_handbook",
+    *         in="query",
+    *         description="Name Handbook",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="limitation",
+    *         in="query",
+    *         description="Limitation in:Cognitive,Locomotion,Vision,Hearing",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="body_mass",
+    *         in="query",
+    *         description="Body Mass",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="weight",
+    *         in="query",
+    *         description="Weight",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="service_date",
+    *         in="query",
+    *         description="Service Date",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="complaints",
+    *         in="query",
+    *         description="Complaints",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="symptoms",
+    *         in="query",
+    *         description="Symptoms",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="vital_signs",
+    *         in="query",
+    *         description="Vital Signs",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="blood_type",
+    *         in="query",
+    *         description="Blood Type in:A+,A-,B+,B-,AB+,AB-,O+,O-",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="blood_pressure",
+    *         in="query",
+    *         description="Blood Pressure",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="hgt",
+    *         in="query",
+    *         description="HGT",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="temperature",
+    *         in="query",
+    *         description="Temperature",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="relative_id",
+    *         in="query",
+    *         description="Relative ID",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="patient_id",
+    *         in="query",
+    *         description="Patient ID",
+    *         required=true,
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function register(Request $request){
 
         $validator = Validator::make($request->all(),[
