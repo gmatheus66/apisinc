@@ -10,16 +10,66 @@ use Illuminate\Support\Facades\Validator;
 
 class RelativePatientController extends Controller
 {
+    /**
+    * @OA\Get(
+    *     path="/relative/patient",
+    *     description="Returns patients linked to family members",
+    *     tags={"Relative"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function get_my_patient_relatives(){
         $rel = RelativePatient::where('relative_id', \auth('relatives')->user()->id )->get();
         return \response()->json($rel);
     }
+
+    /**
+    * @OA\Post(
+    *     path="/register/patient",
+    *     description="relative Register",
+    *     tags={"Relative"},
+    *     @OA\Parameter(
+    *         name="relative_id",
+    *         in="query",
+    *         description="Relative ID",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
+    *         name="patient_id",
+    *         in="query",
+    *         description="Patient ID",
+    *         required=true,
+    *     ),
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    * )
+    */
     public function register(Request $request){
 
         $validator = Validator::make($request->all(),[
             'relative_id' =>  'required|numeric|exists:App\Relative,id',
-            'patient_id' => 'required|numeric|exists:App\Patient,id',
-            'relative_patient' => 'boolean'
+            'patient_id' => 'required|numeric|exists:App\Patient,id'
         ]);
 
         if(sizeof($validator->errors()) > 0 ){
@@ -30,7 +80,7 @@ class RelativePatientController extends Controller
                 $relpat = RelativePatient::create([
                     'relative_id' => $request->get('relative_id'),
                     'patient_id' => $request->get('patient_id'),
-                    'relative_patient' => $request->get('relative_patient')
+                    'relative_patient' => false
                 ]);
 
                 return response()->json("Relative relationship");
