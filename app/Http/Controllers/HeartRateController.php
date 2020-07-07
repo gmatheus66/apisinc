@@ -11,9 +11,9 @@ class HeartRateController extends Controller
 {
      /**
     * @OA\Post(
-    *     path="/doctor/register",
-    *     description="Doctor Register",
-    *     tags={"Doctor"},
+    *     path="/patient/register/heart",
+    *     description="Heart hate Register",
+    *     tags={"Patient"},
     *     @OA\Parameter(
     *         name="patient_id",
     *         in="query",
