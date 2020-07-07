@@ -28,6 +28,7 @@ class HandbookController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function get_handbook_patient(){
@@ -67,6 +68,7 @@ class HandbookController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function get_handbook_doctor(){
@@ -91,7 +93,7 @@ class HandbookController extends Controller
     }
     /**
     * @OA\Get(
-    *     path="/patient/gethandbook/",
+    *     path="/patient/gethandbook/{id}",
     *     description="Returns patient records detail",
     *     tags={"Patient"},
     *     @OA\Response(
@@ -106,6 +108,7 @@ class HandbookController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function get_detail_handbook_patient($id){

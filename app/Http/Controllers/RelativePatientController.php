@@ -27,6 +27,7 @@ class RelativePatientController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function get_my_patient_relatives(){
@@ -63,6 +64,7 @@ class RelativePatientController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function register(Request $request){
@@ -91,13 +93,5 @@ class RelativePatientController extends Controller
 
         }
 
-    }
-
-    public function get_relative_patient($id){
-        $validator = Validator::make(['id' => $id],[
-            'id' => 'required|numeric|exists:RelativePatient,relative_id'
-        ]);
-        $get = RelativePatient::where('relative_id',$id)->get();
-        return response()->json($get);
     }
 }

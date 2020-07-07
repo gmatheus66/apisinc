@@ -32,15 +32,33 @@ class PatientController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
 	public function get_all_patient_relatives(){
 		$patients = Patient::all();
 		return response()->json($patients);
     }
-
-
-     
+    /**
+    * @OA\Get(
+    *     path="/doctor/patient",
+    *     description="Returns a list of patients for the doctor",
+    *     tags={"Doctor"},
+    *     @OA\Response(
+    *         response=200,
+    *         description="OK",
+    *     ),
+    *     @OA\Response(
+    *         response=422,
+    *         description="Missing Data"
+    *     ),
+    *     @OA\Response(
+    *          response=401,
+    *          description="Unauthenticated",
+    *     ),
+    *     security={{ "apiAuth": {} }},
+    * )
+    */
 	public function get_all_patient_doctor(){
 		$patients = DB::select('select id, name from patients');
 		return response()->json($patients);
@@ -211,6 +229,7 @@ class PatientController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function logout()
@@ -288,6 +307,7 @@ class PatientController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function detail_auth_user(){
@@ -310,6 +330,7 @@ class PatientController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
 	public function check_user(){

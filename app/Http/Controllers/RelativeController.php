@@ -177,6 +177,7 @@ class RelativeController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function logout()
@@ -250,6 +251,7 @@ class RelativeController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function detail_auth_user(){
@@ -272,6 +274,7 @@ class RelativeController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function check_user(){
