@@ -17,7 +17,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::post('/doctor/register', 'DoctorController@register')->name('register_doctor');
 Route::post('/doctor/login', 'DoctorController@login')->name('login_doctor');
 Route::post('/doctor/logout', 'DoctorController@logout')->name('logout_doctor');
 
@@ -27,7 +26,10 @@ Route::post('/patient/logout', 'PatientController@logout')->name('logout_patient
 
 Route::post('/relative/register', 'RelativeController@register')->name('register_relative');
 Route::post('/relative/login', 'RelativeController@login')->name('login_relative');
-Route::post('/relative/logout', 'RelativeController@logout')->name('login_logout');
+Route::post('/relative/logout', 'RelativeController@logout')->name('logout_relative');
+
+Route::post('/admim/login', 'AdmimController@login')->name('login_admim');
+Route::post('/admim/logout', 'AdmimController@logout')->name('logout_admim');
 
 
 Route::group(['prefix' => 'doctor','middleware' => ['assign.guard:doctors','jwt.auth']],function ()
@@ -38,6 +40,12 @@ Route::group(['prefix' => 'doctor','middleware' => ['assign.guard:doctors','jwt.
     Route::get('/detail','DoctorController@detail_auth_user')->name('detail_doctor');
     Route::get('/gethandbook', 'HandbookController@get_handbook_doctor')->name('get_handbook_doctor');
 });
+Route::group(['prefix' => 'admim','middleware' => ['assign.guard:admims','jwt.auth']],function ()
+{
+	Route::post('/doctor/register', 'DoctorController@register')->name('register_doctor');
+
+});
+
 Route::group(['prefix' => 'relative','middleware' => ['assign.guard:relatives','jwt.auth']],function ()
 {
 	Route::get('/detail','RelativeController@detail_auth_user')->name('detail_relative');
