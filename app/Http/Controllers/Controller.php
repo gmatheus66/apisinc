@@ -38,6 +38,10 @@ class Controller extends BaseController
      *     name="Doctor",
      *     description="Endpoints Doctors",
      * )
+     * @OA\Tag(
+     *     name="Admim",
+     *     description="Endpoints Admims",
+     * )
      *
      *  @OA\Get(
      *     path="/",

@@ -36,9 +36,9 @@ class DoctorController extends Controller
     }
     /**
     * @OA\Post(
-    *     path="/doctor/register",
+    *     path="admim/doctor/register",
     *     description="Doctor Register",
-    *     tags={"Doctor"},
+    *     tags={"Admim"},
     *     @OA\Parameter(
     *         name="name",
     *         in="query",
@@ -81,6 +81,7 @@ class DoctorController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function register(Request $request){

@@ -224,6 +224,7 @@ class HandbookController extends Controller
     *          response=401,
     *          description="Unauthenticated",
     *     ),
+    *     security={{ "apiAuth": {} }},
     * )
     */
     public function register(Request $request){
