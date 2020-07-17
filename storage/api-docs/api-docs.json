@@ -18,6 +18,65 @@
         }
     ],
     "paths": {
+        "/admim/logout": {
+            "post": {
+                "tags": [
+                    "Admim"
+                ],
+                "description": "Login Doctor",
+                "operationId": "App\\Http\\Controllers\\AdmimController::logout",
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
+            }
+        },
+        "/admim/login": {
+            "post": {
+                "tags": [
+                    "Admim"
+                ],
+                "description": "Login Admim",
+                "operationId": "App\\Http\\Controllers\\AdmimController::login",
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email",
+                        "required": true
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Password",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
         "/": {
             "get": {
                 "description": "Home page",
@@ -53,10 +112,10 @@
                 ]
             }
         },
-        "/doctor/register": {
+        "admim/doctor/register": {
             "post": {
                 "tags": [
-                    "Doctor"
+                    "Admim"
                 ],
                 "description": "Doctor Register",
                 "operationId": "App\\Http\\Controllers\\DoctorController::register",
@@ -102,7 +161,12 @@
                     "401": {
                         "description": "Unauthenticated"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
         "/doctor/logout": {
@@ -367,7 +431,12 @@
                     "401": {
                         "description": "Unauthenticated"
                     }
-                }
+                },
+                "security": [
+                    {
+                        "apiAuth": []
+                    }
+                ]
             }
         },
         "/patient/register/heart": {
@@ -955,6 +1024,10 @@
         {
             "name": "Doctor",
             "description": "Endpoints Doctors"
+        },
+        {
+            "name": "Admim",
+            "description": "Endpoints Admims"
         }
     ]
 }
