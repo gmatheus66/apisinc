@@ -61,6 +61,11 @@ return [
             'provider' => 'relative',
             'hash' => false,
         ],
+        'admims' => [
+            'driver' => 'jwt',
+            'provider' => 'admims',
+            'hash' => false,
+        ],
     ],
 
     /*
@@ -96,6 +101,10 @@ return [
         'relative' => [
             'driver' => 'eloquent',
             'model' => App\Relative::class,
+        ],
+        'admims' => [
+            'driver' => 'eloquent',
+            'model' => App\Admim::class,
         ]
 
         // 'users' => [
