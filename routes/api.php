@@ -40,9 +40,10 @@ Route::group(['prefix' => 'doctor','middleware' => ['assign.guard:doctors','jwt.
     Route::get('/detail','DoctorController@detail_auth_user')->name('detail_doctor');
     Route::get('/gethandbook', 'HandbookController@get_handbook_doctor')->name('get_handbook_doctor');
 });
-Route::group(['prefix' => 'admim','middleware' => ['assign.guard:admims','jwt.auth']],function ()
+Route::group(['prefix' => 'admin','middleware' => ['assign.guard:admins','jwt.auth']],function ()
 {
 	Route::post('/doctor/register', 'DoctorController@register')->name('register_doctor');
+	Route::post('/institution/register', 'InstitutionController@register')->name('register_institution');
 
 });
 
