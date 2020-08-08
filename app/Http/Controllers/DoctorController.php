@@ -64,6 +64,12 @@ class DoctorController extends Controller
     *         required=true,
     *     ),
     *     @OA\Parameter(
+    *         name="institutions_id",
+    *         in="query",
+    *         description="Institution",
+    *         required=true,
+    *     ),
+    *     @OA\Parameter(
     *         name="password",
     *         in="query",
     *         description="Password",
@@ -90,7 +96,8 @@ class DoctorController extends Controller
 			'name' => 'required|string|min:2|max:50',
 			'email' => 'required',
 			'crm' =>'required|min:6|max:12|unique:doctors,crm',
-			'specialization'=> 'required|string|min:5|max:50',
+            'specialization'=> 'required|string|min:5|max:50',
+            'institutions_id' => 'required|min:1',
 			'password' => 'required'
 
 		]);
@@ -106,7 +113,8 @@ class DoctorController extends Controller
 				'email' => $request->get('email'),
 				'crm'=> $request->get('crm'),
 				'specialization'=> $request->get('specialization'),
-				'password' => Hash::make($request->get('password')),
+                'password' => Hash::make($request->get('password')),
+                'institutions_id' => $request->get('institutions_id')
 			]);
 
 			$token = auth('doctors')->login($doc);
