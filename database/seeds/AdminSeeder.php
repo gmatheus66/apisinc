@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\Admim;
+use App\Admin;
 
-class AdmimSeeder extends Seeder
+class AdminSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,9 +12,9 @@ class AdmimSeeder extends Seeder
      */
     public function run()
     {
-        Admim::create([
-            'name' => 'admim',
-            'email' => 'admim@login.com',
+        Admin::create([
+            'name' => 'admin',
+            'email' => 'admin@login.com',
             'password' => Hash::make('password')
         ]);
     }

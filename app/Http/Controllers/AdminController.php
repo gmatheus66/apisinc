@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-class AdmimController extends Controller
+class AdminController extends Controller
 {
     
     /**
     * @OA\Post(
-    *     path="/admim/logout",
-    *     description="Login Doctor",
-    *     tags={"Admim"},
+    *     path="/admin/logout",
+    *     description="Logout Admin",
+    *     tags={"Admin"},
     *     @OA\Response(
     *         response=200,
     *         description="OK",
@@ -35,9 +35,9 @@ class AdmimController extends Controller
     }
     /**
     * @OA\Post(
-    *     path="/admim/login",
-    *     description="Login Admim",
-    *     tags={"Admim"},
+    *     path="/admin/login",
+    *     description="Login Admin",
+    *     tags={"Admin"},
     *     @OA\Parameter(
     *         name="email",
     *         in="query",
@@ -74,7 +74,7 @@ class AdmimController extends Controller
 
 		$credentials = request(['email', 'password']);
 
-        if (! $token = auth('admims')->attempt($credentials)) {
+        if (! $token = auth('admins')->attempt($credentials)) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -86,8 +86,8 @@ class AdmimController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type'   => 'Bearer',
-            'expires_in'   => auth('admims')->factory()->getTTL() * 60,
-            'user' => auth('admims')->user()
+            'expires_in'   => auth('admins')->factory()->getTTL() * 60,
+            'user' => auth('admins')->user()
         ]);
 	}
 

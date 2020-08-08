@@ -7,7 +7,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
-class Admim extends Authenticatable implements JWTSubject
+class Admin extends Authenticatable implements JWTSubject
 {
     protected $fillable = [
         'name',
