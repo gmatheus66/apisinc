@@ -28,8 +28,8 @@ Route::post('/relative/register', 'RelativeController@register')->name('register
 Route::post('/relative/login', 'RelativeController@login')->name('login_relative');
 Route::post('/relative/logout', 'RelativeController@logout')->name('logout_relative');
 
-Route::post('/admim/login', 'AdmimController@login')->name('login_admim');
-Route::post('/admim/logout', 'AdmimController@logout')->name('logout_admim');
+Route::post('/admin/login', 'AdminController@login')->name('login_admin');
+Route::post('/admin/logout', 'AdminController@logout')->name('logout_admin');
 
 
 Route::group(['prefix' => 'doctor','middleware' => ['assign.guard:doctors','jwt.auth']],function ()

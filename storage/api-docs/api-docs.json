@@ -18,13 +18,13 @@
         }
     ],
     "paths": {
-        "/admim/logout": {
+        "/admin/logout": {
             "post": {
                 "tags": [
-                    "Admim"
+                    "Admin"
                 ],
-                "description": "Login Doctor",
-                "operationId": "App\\Http\\Controllers\\AdmimController::logout",
+                "description": "Logout Admin",
+                "operationId": "App\\Http\\Controllers\\AdminController::logout",
                 "responses": {
                     "200": {
                         "description": "OK"
@@ -43,13 +43,13 @@
                 ]
             }
         },
-        "/admim/login": {
+        "/admin/login": {
             "post": {
                 "tags": [
-                    "Admim"
+                    "Admin"
                 ],
-                "description": "Login Admim",
-                "operationId": "App\\Http\\Controllers\\AdmimController::login",
+                "description": "Login Admin",
+                "operationId": "App\\Http\\Controllers\\AdminController::login",
                 "parameters": [
                     {
                         "name": "email",
@@ -142,6 +142,12 @@
                         "name": "specialization",
                         "in": "query",
                         "description": "Specialization",
+                        "required": true
+                    },
+                    {
+                        "name": "institutions_id",
+                        "in": "query",
+                        "description": "Institution",
                         "required": true
                     },
                     {
@@ -463,6 +469,70 @@
                         "name": "heart",
                         "in": "query",
                         "description": "Heart",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "422": {
+                        "description": "Missing Data"
+                    },
+                    "401": {
+                        "description": "Unauthenticated"
+                    }
+                }
+            }
+        },
+        "/institution/register": {
+            "post": {
+                "tags": [
+                    "Admin"
+                ],
+                "description": "Relative Register",
+                "operationId": "App\\Http\\Controllers\\InstitutionController::register",
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Name",
+                        "required": true
+                    },
+                    {
+                        "name": "telephone",
+                        "in": "query",
+                        "description": "Telephone",
+                        "required": true
+                    },
+                    {
+                        "name": "address",
+                        "in": "query",
+                        "description": "Address",
+                        "required": true
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "City",
+                        "required": true
+                    },
+                    {
+                        "name": "country",
+                        "in": "query",
+                        "description": "Country",
+                        "required": true
+                    },
+                    {
+                        "name": "state_province",
+                        "in": "query",
+                        "description": "State Province",
+                        "required": true
+                    },
+                    {
+                        "name": "zip",
+                        "in": "query",
+                        "description": "Zip",
                         "required": true
                     }
                 ],
@@ -1026,8 +1096,8 @@
             "description": "Endpoints Doctors"
         },
         {
-            "name": "Admim",
-            "description": "Endpoints Admims"
+            "name": "Admin",
+            "description": "Endpoints Admins"
         }
     ]
 }
