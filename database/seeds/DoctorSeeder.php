@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 use App\Doctor;
+use App\Institution;
 
 class DoctorSeeder extends Seeder
 {
@@ -20,7 +21,8 @@ class DoctorSeeder extends Seeder
             'email' => 'doctor@login.com',
             'crm' => $faker->regexify('([0-9]{4})-([A-Z]{2})'),
             'specialization' => 'Clinico Geral',
-            'password' => Hash::make('password')
+            'password' => Hash::make('password'),
+            'institutions_id' => Institution::where('name','CabelereiraLeila')->first()->id,
         ]);
         
     }
