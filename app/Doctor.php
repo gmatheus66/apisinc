@@ -45,4 +45,8 @@ class Doctor extends Authenticatable implements JWTSubject
     {
         return [];
     }
+
+    public function relationship_patient(){
+        return $this->belongsTo('App\Institution');
+    }
 }

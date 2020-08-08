@@ -23,5 +23,9 @@ class Institution extends Model
 		'update_at',
 		'token_band',
 		'token_login',
-	];
+    ];
+    
+    public function relationship_relative(){
+        return $this->hasMany('App\Doctor');
+    }
 }
