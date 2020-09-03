@@ -231,7 +231,7 @@ class HandbookController extends Controller
 
         $validator = Validator::make($request->all(),[
             'name_handbook' => 'required|min:5|max:50',
-            'limitation' => 'required|in:Cognitive,Locomotion,Vision,Hearing',
+            'limitation' => 'required|in:Cognitive,Locomotion,Vision,Hearing,None',
             'body_mass' => 'required|numeric|between:0,999.99',
             'weight' => 'required|numeric|between:0,299.99',
             'service_date' => 'required|date',
